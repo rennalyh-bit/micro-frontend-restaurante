@@ -1,30 +1,25 @@
-import React, { Suspense, lazy } from "react";
+import React from "react";
 
-const Cardapio = lazy(() =>
+const Cardapio = React.lazy(() =>
   import("microCardapio/Cardapio")
 );
 
-const Pedido = lazy(() =>
+const Pedido = React.lazy(() =>
   import("microPedido/Pedido")
 );
 
 export default function App() {
   return (
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: "1fr 1fr",
-        gap: "20px",
-        padding: "20px",
-      }}
-    >
-      <Suspense fallback={<h1>Carregando...</h1>}>
-        <Cardapio />
-      </Suspense>
+    <div className="container">
+      <React.Suspense fallback="Carregando...">
+        <div className="micro">
+          <Cardapio />
+        </div>
 
-      <Suspense fallback={<h1>Carregando...</h1>}>
-        <Pedido />
-      </Suspense>
+        <div className="micro">
+          <Pedido />
+        </div>
+      </React.Suspense>
     </div>
   );
 }
